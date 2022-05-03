@@ -1,14 +1,20 @@
 import {useEffect, useState } from 'react';
 
 const App = () => {
-  const [name, setName] = useState(null);
+  const [starship, setStarship] = useState([]);
 
   useEffect(() => {
-    fetch('https://swapi.dev/api/starships/9/')
-    .then(res => res.json())
-    .then(res => setName(res.name));
+    async function fetchStarship() {
+      let res = await fetch ('https://swapi.dev/api/starships');
+      let data = await res.json();
+      setStarship(data.results);
+    }
+
+    fetchStarship();
+    console.log(starship);
+
   }, []);
-  return <p>{name}</p>;
+  return <p>hola</p>;
 }
 
 export default App;
