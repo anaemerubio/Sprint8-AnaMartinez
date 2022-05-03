@@ -1,25 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import {useEffect, useState } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const [name, setName] = useState(null);
+
+  useEffect(() => {
+    fetch('https://swapi.dev/api/starships/9/')
+    .then(res => res.json())
+    .then(res => setName(res.name));
+  }, []);
+  return <p>{name}</p>;
 }
 
 export default App;
